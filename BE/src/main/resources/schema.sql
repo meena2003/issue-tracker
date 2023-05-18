@@ -6,7 +6,7 @@ create table if not exists issue
     member_id bigint,
     title varchar(255),
     description varchar(255),
-    is_open tinyint,
+    is_open bit,
     create_date_time datetime default current_timestamp,
     milestone_id bigint
 );

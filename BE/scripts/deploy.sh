@@ -1,6 +1,6 @@
 #!/bin/bash
 
-REPOSITORY=/home/ubuntu/app/step2
+REPOSITORY=/home/ubuntu/app/BE
 PROJECT_NAME=issue-tracker # 빌드하면 나오는 명칭으로 설정(권장) [ex: build.gradle(issue-tracker)]
 
 echo "> Build 파일복사"

@@ -9,6 +9,7 @@ branches:
 # 폴더 변경시 필요한 부분(루트 폴더가 다를시)
 before_script:
   - cd BE/
+  - chmod +x gradlew
 
 # Travis CI 서버의 Home
 cache:

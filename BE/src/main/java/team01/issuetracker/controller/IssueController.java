@@ -19,8 +19,8 @@ public class IssueController {
     private final Logger logger = LoggerFactory.getLogger(IssueController.class);
 
     @GetMapping
-    public ResponseEntity<?> view(@RequestParam("status") int status) {
-        if (status == 1) {
+    public ResponseEntity<?> view(@RequestParam("status") String status) {
+        if (status.equals("open")) {
             logger.info("오픈 이슈 페이지");
             return ResponseEntity.ok(issueService.openIssues());
         } else {

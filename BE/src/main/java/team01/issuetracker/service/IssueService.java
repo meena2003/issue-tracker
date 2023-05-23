@@ -1,0 +1,129 @@
+package team01.issuetracker.service;
+
+import lombok.RequiredArgsConstructor;
+import org.springframework.stereotype.Service;
+import team01.issuetracker.service.dto.response.IssueResponseDTO;
+import team01.issuetracker.service.dto.response.IssuesResponseDTO;
+import team01.issuetracker.service.vo.Count;
+
+import java.sql.Timestamp;
+import java.time.LocalDateTime;
+import java.time.ZoneId;
+import java.time.ZonedDateTime;
+import java.time.format.DateTimeFormatter;
+import java.util.ArrayList;
+import java.util.List;
+
+@Service
+@RequiredArgsConstructor
+public class IssueService {
+
+    public IssuesResponseDTO openIssues() {
+        Count count = Count.builder() // 임시 값(명세서)
+                .label(4)
+                .milestone(2)
+                .openedIssue(2)
+                .closedIssue(2)
+                .build();
+        List<IssueResponseDTO> issues = new ArrayList<>();
+
+        LocalDateTime localDateTime = LocalDateTime.parse("2023-05-10 10:10", DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm"));
+        ZonedDateTime zonedDateTime = ZonedDateTime.of(localDateTime, ZoneId.of("Asia/Seoul"));
+
+        List<String> assignees = new ArrayList<>();
+        assignees.add("포코");
+        assignees.add("다온");
+
+        List<String> labels = new ArrayList<>();
+        labels.add("FE");
+        labels.add("bug");
+
+        IssueResponseDTO temp01 = new IssueResponseDTO(
+                1L
+                , "[FE] 이슈"
+                , zonedDateTime.toLocalDateTime()
+                , assignees
+                , labels
+                , "테스크01"
+                , "포코"
+                , "https://avatars.githubusercontent.com/u/101160636?s=40&v=4");
+        issues.add(IssueResponseDTO.of(temp01));
+
+        LocalDateTime localDateTime2 = LocalDateTime.parse("2023-05-10 20:20", DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm"));
+        ZonedDateTime zonedDateTime2 = ZonedDateTime.of(localDateTime2, ZoneId.of("Asia/Seoul"));
+
+
+        List<String> assignees02 = new ArrayList<>();
+        assignees02.add("해나");
+        assignees02.add("하림");
+
+        List<String> labels02 = new ArrayList<>();
+        labels02.add("IOS");
+
+        IssueResponseDTO temp02 = new IssueResponseDTO(
+                3L
+                , "[IOS] 이슈"
+                , zonedDateTime2.toLocalDateTime()
+                , assignees02
+                , labels02
+                , "테스크02"
+                , "하림"
+                , "https://avatars.githubusercontent.com/u/90844696?s=40&v=4");
+        issues.add(IssueResponseDTO.of(temp02));
+
+        return IssuesResponseDTO.of(count, issues);
+    }
+
+    public IssuesResponseDTO closeIssues() {
+        Count count = Count.builder() // 임시 값(명세서)
+                .label(4)
+                .milestone(2)
+                .openedIssue(2)
+                .closedIssue(2)
+                .build();
+        List<IssueResponseDTO> issues = new ArrayList<>();
+
+        LocalDateTime localDateTime = LocalDateTime.parse("2023-05-10 14:35", DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm"));
+        ZonedDateTime zonedDateTime = ZonedDateTime.of(localDateTime, ZoneId.of("Asia/Seoul"));
+
+
+        List<String> assignees = new ArrayList<>();
+        assignees.add("듀이");
+        assignees.add("코어");
+        assignees.add("만쥬");
+
+        List<String> labels = new ArrayList<>();
+        labels.add("BE");
+        labels.add("bug");
+
+        IssueResponseDTO temp01 = new IssueResponseDTO(
+                2L
+                , "[BE] 이슈"
+                , zonedDateTime.toLocalDateTime()
+                , assignees
+                , labels
+                , "테스크01"
+                , "만쥬"
+                , "https://avatars.githubusercontent.com/u/20828490?s=40&v=4");
+        issues.add(IssueResponseDTO.of(temp01));
+
+        LocalDateTime localDateTime2 = LocalDateTime.parse("2023-05-10 22:22", DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm"));
+        ZonedDateTime zonedDateTime2 = ZonedDateTime.of(localDateTime2, ZoneId.of("Asia/Seoul"));
+
+        List<String> assignees02 = new ArrayList<>();
+        List<String> labels02 = new ArrayList<>();
+
+        IssueResponseDTO temp02 = new IssueResponseDTO(
+                4L
+                , "[BE] 테스트"
+                , zonedDateTime2.toLocalDateTime()
+                , assignees02
+                , labels02
+                , ""
+                , "만쥬"
+                , "https://avatars.githubusercontent.com/u/20828490?s=40&v=4");
+        issues.add(IssueResponseDTO.of(temp02));
+
+        return IssuesResponseDTO.of(count, issues);
+    }
+}

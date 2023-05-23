@@ -8,6 +8,8 @@ import team01.issuetracker.service.vo.Count;
 
 import java.sql.Timestamp;
 import java.time.LocalDateTime;
+import java.time.ZoneId;
+import java.time.ZonedDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
@@ -21,13 +23,12 @@ public class IssueService {
                 .label(4)
                 .milestone(2)
                 .openedIssue(2)
-                .closedIssue(1)
+                .closedIssue(2)
                 .build();
         List<IssueResponseDTO> issues = new ArrayList<>();
 
-//        Timestamp createdDateTime = Timestamp.valueOf(LocalDateTime.parse(
-//                "2023-05-10 10:10"
-//                , DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm")));
+        LocalDateTime localDateTime = LocalDateTime.parse("2023-05-10 10:10", DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm"));
+        ZonedDateTime zonedDateTime = ZonedDateTime.of(localDateTime, ZoneId.of("Asia/Seoul"));
 
         List<String> assignees = new ArrayList<>();
         assignees.add("포코");
@@ -40,7 +41,7 @@ public class IssueService {
         IssueResponseDTO temp01 = new IssueResponseDTO(
                 1L
                 , "[FE] 이슈"
-                , "2023-05-10 10:10"
+                , zonedDateTime.toLocalDateTime()
                 , assignees
                 , labels
                 , "테스크01"
@@ -48,9 +49,9 @@ public class IssueService {
                 , "https://avatars.githubusercontent.com/u/101160636?s=40&v=4");
         issues.add(IssueResponseDTO.of(temp01));
 
-//        Timestamp createdDateTime02 = Timestamp.valueOf(LocalDateTime.parse(
-//                "2023-05-10 20:20"
-//                , DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm")));
+        LocalDateTime localDateTime2 = LocalDateTime.parse("2023-05-10 20:20", DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm"));
+        ZonedDateTime zonedDateTime2 = ZonedDateTime.of(localDateTime2, ZoneId.of("Asia/Seoul"));
+
 
         List<String> assignees02 = new ArrayList<>();
         assignees02.add("해나");
@@ -62,7 +63,7 @@ public class IssueService {
         IssueResponseDTO temp02 = new IssueResponseDTO(
                 3L
                 , "[IOS] 이슈"
-                , "2023-05-10 20:20"
+                , zonedDateTime2.toLocalDateTime()
                 , assignees02
                 , labels02
                 , "테스크02"
@@ -78,13 +79,13 @@ public class IssueService {
                 .label(4)
                 .milestone(2)
                 .openedIssue(2)
-                .closedIssue(1)
+                .closedIssue(2)
                 .build();
         List<IssueResponseDTO> issues = new ArrayList<>();
 
-//        Timestamp createdDateTime = Timestamp.valueOf(LocalDateTime.parse(
-//                "2023-05-10 14:35"
-//                , DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm")));
+        LocalDateTime localDateTime = LocalDateTime.parse("2023-05-10 14:35", DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm"));
+        ZonedDateTime zonedDateTime = ZonedDateTime.of(localDateTime, ZoneId.of("Asia/Seoul"));
+
 
         List<String> assignees = new ArrayList<>();
         assignees.add("듀이");
@@ -98,7 +99,7 @@ public class IssueService {
         IssueResponseDTO temp01 = new IssueResponseDTO(
                 2L
                 , "[BE] 이슈"
-                , "2023-05-10 14:35"
+                , zonedDateTime.toLocalDateTime()
                 , assignees
                 , labels
                 , "테스크01"
@@ -106,9 +107,8 @@ public class IssueService {
                 , "https://avatars.githubusercontent.com/u/20828490?s=40&v=4");
         issues.add(IssueResponseDTO.of(temp01));
 
-//        Timestamp createdDateTime02 = Timestamp.valueOf(LocalDateTime.parse(
-//                "2023-05-10 14:35"
-//                , DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm")));
+        LocalDateTime localDateTime2 = LocalDateTime.parse("2023-05-10 22:22", DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm"));
+        ZonedDateTime zonedDateTime2 = ZonedDateTime.of(localDateTime2, ZoneId.of("Asia/Seoul"));
 
         List<String> assignees02 = new ArrayList<>();
         List<String> labels02 = new ArrayList<>();
@@ -116,7 +116,7 @@ public class IssueService {
         IssueResponseDTO temp02 = new IssueResponseDTO(
                 4L
                 , "[BE] 테스트"
-                , "2023-05-10 22:22"
+                , zonedDateTime2.toLocalDateTime()
                 , assignees02
                 , labels02
                 , ""

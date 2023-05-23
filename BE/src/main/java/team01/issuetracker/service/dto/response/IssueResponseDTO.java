@@ -5,6 +5,7 @@ import lombok.Builder;
 import lombok.Getter;
 
 import java.sql.Timestamp;
+import java.time.LocalDateTime;
 import java.util.List;
 
 @Getter
@@ -14,7 +15,7 @@ public class IssueResponseDTO {
 
     private final Long id;
     private final String title;
-    private final String createdDateTime; // 형식이 이상해서 잠시 스트링
+    private final LocalDateTime createdDateTime; // 형식이 이상해서 잠시 스트링
     private final List<String> assignees; // 임시 리스트
     private final List<String> labels; // 임시 리스
     private final String milestone;

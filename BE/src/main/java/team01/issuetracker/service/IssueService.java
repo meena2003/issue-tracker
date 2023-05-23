@@ -6,7 +6,6 @@ import team01.issuetracker.service.dto.response.IssueResponseDTO;
 import team01.issuetracker.service.dto.response.IssuesResponseDTO;
 import team01.issuetracker.service.vo.Count;
 
-import java.sql.Timestamp;
 import java.time.LocalDateTime;
 import java.time.ZoneId;
 import java.time.ZonedDateTime;

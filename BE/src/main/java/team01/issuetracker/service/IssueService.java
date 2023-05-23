@@ -5,6 +5,7 @@ import org.springframework.stereotype.Service;
 import team01.issuetracker.service.dto.response.IssueResponseDTO;
 import team01.issuetracker.service.dto.response.IssuesResponseDTO;
 import team01.issuetracker.service.vo.Count;
+import team01.issuetracker.service.vo.minimalLabel;
 
 import java.time.LocalDateTime;
 import java.time.ZoneId;
@@ -33,9 +34,9 @@ public class IssueService {
         assignees.add("포코");
         assignees.add("다온");
 
-        List<String> labels = new ArrayList<>();
-        labels.add("FE");
-        labels.add("bug");
+        List<minimalLabel> labels = new ArrayList<>();
+        labels.add(new minimalLabel("FE", "#655CC7"));
+        labels.add(new minimalLabel("bug", "#14D6B6"));
 
         IssueResponseDTO temp01 = new IssueResponseDTO(
                 1L
@@ -56,12 +57,12 @@ public class IssueService {
         assignees02.add("해나");
         assignees02.add("하림");
 
-        List<String> labels02 = new ArrayList<>();
-        labels02.add("IOS");
+        List<minimalLabel> labels02 = new ArrayList<>();
+        labels02.add(new minimalLabel("iOS", "#655CC7"));
 
         IssueResponseDTO temp02 = new IssueResponseDTO(
                 3L
-                , "[IOS] 이슈"
+                , "[iOS] 이슈"
                 , zonedDateTime2.toLocalDateTime()
                 , assignees02
                 , labels02
@@ -91,9 +92,9 @@ public class IssueService {
         assignees.add("코어");
         assignees.add("만쥬");
 
-        List<String> labels = new ArrayList<>();
-        labels.add("BE");
-        labels.add("bug");
+        List<minimalLabel> labels = new ArrayList<>();
+        labels.add(new minimalLabel("BE", "#EC8D8D"));
+        labels.add(new minimalLabel("bug", "#14D6B6"));
 
         IssueResponseDTO temp01 = new IssueResponseDTO(
                 2L
@@ -110,7 +111,7 @@ public class IssueService {
         ZonedDateTime zonedDateTime2 = ZonedDateTime.of(localDateTime2, ZoneId.of("Asia/Seoul"));
 
         List<String> assignees02 = new ArrayList<>();
-        List<String> labels02 = new ArrayList<>();
+        List<minimalLabel> labels02 = new ArrayList<>();
 
         IssueResponseDTO temp02 = new IssueResponseDTO(
                 4L

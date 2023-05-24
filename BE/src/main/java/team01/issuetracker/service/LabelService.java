@@ -14,6 +14,9 @@ import java.util.List;
 @RequiredArgsConstructor
 public class LabelService {
 
+    /*
+    이 아이는 듀이의 수정을 기다리고 있습니다 ㅠ
+     */
     public LabelsResponseDTO getLabels() {
         Count count = Count.builder() // 임시 값(명세서)
                 .label(4)

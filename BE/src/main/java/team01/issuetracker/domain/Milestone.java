@@ -23,12 +23,12 @@ public class Milestone {
     private String title;
     @Column("description")
     private String description;
-//    @Column("is_open")
-//    private boolean isOpen;
-//    @Column("create_date_time")
-//    private Timestamp createAt;
-//    @Column("due_date")
-//    private Date dueDate;
+    @Column("is_open")
+    private boolean isOpen;
+    @Column("create_date_time")
+    private Timestamp createAt;
+    @Column("due_date")
+    private Date dueDate;
 
 
 }

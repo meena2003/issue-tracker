@@ -8,14 +8,14 @@ import team01.issuetracker.service.vo.Assignee;
 @Getter
 @Builder
 @AllArgsConstructor
-public class AssigneeResponseDTO {
+public class AssigneeDTO {
 
     private final long id;
     private final String name;
     private final String imgUrl;
 
-    public static AssigneeResponseDTO of(Assignee assignee) {
-        return AssigneeResponseDTO.builder()
+    public static AssigneeDTO of(Assignee assignee) {
+        return AssigneeDTO.builder()
                 .id(assignee.getId())
                 .name(assignee.getName())
                 .imgUrl(assignee.getImgUrl())

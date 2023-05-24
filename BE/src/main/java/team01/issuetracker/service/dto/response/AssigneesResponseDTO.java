@@ -11,11 +11,5 @@ import java.util.List;
 @AllArgsConstructor
 public class AssigneesResponseDTO {
 
-    private final List<AssigneeResponseDTO> assignees;
-
-    public static AssigneesResponseDTO of(List<AssigneeResponseDTO> assignees) {
-        return AssigneesResponseDTO.builder()
-                .assignees(assignees)
-                .build();
-    }
+    private final List<AssigneeDTO> assignees;
 }

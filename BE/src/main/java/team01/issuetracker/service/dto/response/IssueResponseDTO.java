@@ -3,8 +3,8 @@ package team01.issuetracker.service.dto.response;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
+import team01.issuetracker.service.vo.MiniLabel;
 
-import java.sql.Timestamp;
 import java.time.LocalDateTime;
 import java.util.List;
 
@@ -17,7 +17,7 @@ public class IssueResponseDTO {
     private final String title;
     private final LocalDateTime createdDateTime; // 형식이 이상해서 잠시 스트링
     private final List<String> assignees; // 임시 리스트
-    private final List<String> labels; // 임시 리스
+    private final List<MiniLabel> labels; // 임시 리스트
     private final String milestone;
     private final String author;
     private final String authorUrl;

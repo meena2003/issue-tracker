@@ -2,6 +2,7 @@ package team01.issuetracker.domain;
 
 import lombok.*;
 import org.springframework.data.annotation.Id;
+import org.springframework.data.annotation.Transient;
 import org.springframework.data.jdbc.core.mapping.AggregateReference;
 import org.springframework.data.relational.core.mapping.Column;
 import org.springframework.data.relational.core.mapping.MappedCollection;
@@ -16,6 +17,7 @@ import java.util.Set;
 @ToString
 @Getter
 @AllArgsConstructor
+@NoArgsConstructor
 @Builder
 @Table("issue")
 public class Issue {
@@ -37,9 +39,13 @@ public class Issue {
 
     //1:N 관계, idColumn : 자식 엔티티가 가지는 외래키 keyColumn : 자식 엔티티의 기본키
     @MappedCollection(idColumn = "issue_id", keyColumn = "id")
+    @Transient
+    @Builder.Default
     private Set<Manager> managers = new HashSet<>();
 
     @MappedCollection(idColumn = "issue_id", keyColumn = "id")
+    @Transient
+    @Builder.Default
     private Set<IssueLabel> issueLabels = new HashSet<>();
 
 

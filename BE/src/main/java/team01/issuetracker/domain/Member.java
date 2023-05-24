@@ -17,7 +17,7 @@ import org.springframework.data.relational.core.mapping.Table;
 public class Member {
     @Id
     @Column("id")
-    private long id;
+    private Long id;
     @Column("name")
     private String name;
     @Column("file_url")

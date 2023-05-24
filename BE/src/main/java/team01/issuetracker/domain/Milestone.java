@@ -8,8 +8,6 @@ import org.springframework.data.relational.core.mapping.Table;
 
 import java.sql.Date;
 import java.sql.Timestamp;
-import java.time.LocalDate;
-import java.time.LocalDateTime;
 
 
 @Getter
@@ -27,9 +25,7 @@ public class Milestone {
     private String description;
     @Column("is_open")
     private boolean isOpen;
-    @Column("create_date_time")
-    private LocalDateTime createAt;
     @Column("due_date")
-    private LocalDate dueDate;
+    private Date dueDate;
 
 }

@@ -16,7 +16,7 @@ import org.springframework.data.relational.core.mapping.Table;
 public class Label {
     @Id
     @Column("id")
-    private long id;
+    private Long id;
     @Column("title")
     private String title;
     @Column("description")

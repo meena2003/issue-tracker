@@ -11,6 +11,6 @@ public class Count {
 
     private final int label;
     private final int milestone;
-    private final int openedIssue;
-    private final int closedIssue;
+    private final int opened;
+    private final int closed;
 }

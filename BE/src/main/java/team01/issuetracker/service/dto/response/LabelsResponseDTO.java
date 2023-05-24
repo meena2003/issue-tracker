@@ -4,6 +4,7 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
 import team01.issuetracker.domain.Label;
+import team01.issuetracker.service.vo.Count;
 
 import java.util.List;
 
@@ -12,11 +13,7 @@ import java.util.List;
 @AllArgsConstructor
 public class LabelsResponseDTO {
 
-    private final List<Label> labels;
+    private final Count count;
 
-    public static LabelsResponseDTO of(List<Label> labels) {
-        return LabelsResponseDTO.builder()
-                .labels(labels)
-                .build();
-    }
+    private final List<LabelDTO> labels;
 }

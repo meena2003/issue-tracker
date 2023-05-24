@@ -19,7 +19,7 @@ public class AssigneeController {
 
     @GetMapping
     public ResponseEntity<?> assigneesView() {
-        logger.info("담당자 조회 요청");
+        logger.info("담당자 조회");
         return ResponseEntity.ok(assigneeService.getAssignees());
     }
 }

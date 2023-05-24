@@ -7,7 +7,7 @@ import lombok.Getter;
 @Getter
 @Builder
 @AllArgsConstructor
-public class minimalLabel {
+public class MiniLabel {
     private final String title;
     private final String bgColorCode;
 }

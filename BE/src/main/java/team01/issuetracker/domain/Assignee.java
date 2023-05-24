@@ -12,8 +12,8 @@ import org.springframework.data.relational.core.mapping.Table;
 @Getter
 @AllArgsConstructor
 @Builder
-@Table("manager")
-public class Manager {
+@Table("assignee")
+public class Assignee {
     @Id
     @Column("id")
     private Long id;

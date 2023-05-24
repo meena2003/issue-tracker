@@ -22,8 +22,8 @@ public class IssueService {
         Count count = Count.builder() // 임시 값(명세서)
                 .label(4)
                 .milestone(2)
-                .openedIssue(2)
-                .closedIssue(2)
+                .opened(2)
+                .closed(2)
                 .build();
         List<IssueResponseDTO> issues = new ArrayList<>();
 
@@ -78,8 +78,8 @@ public class IssueService {
         Count count = Count.builder() // 임시 값(명세서)
                 .label(4)
                 .milestone(2)
-                .openedIssue(2)
-                .closedIssue(2)
+                .opened(2)
+                .closed(2)
                 .build();
         List<IssueResponseDTO> issues = new ArrayList<>();
 

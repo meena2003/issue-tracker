@@ -3,7 +3,6 @@ package team01.issuetracker.service;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import team01.issuetracker.domain.Label;
 import team01.issuetracker.repository.LabelRepository;
 import team01.issuetracker.service.dto.response.LabelDTO;
 import team01.issuetracker.service.dto.response.LabelsResponseDTO;

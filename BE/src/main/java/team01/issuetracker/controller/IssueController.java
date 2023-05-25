@@ -29,7 +29,7 @@ public class IssueController {
             logger.info("오픈 이슈 페이지");
             return ResponseEntity.ok(issueService.openIssues());
         }
-        if (requestDTO.getStatus().equals("closed")){
+        if (requestDTO.getStatus().equals("closed")) {
             logger.info("클로즈 이슈 페이지");
             return ResponseEntity.ok(issueService.closeIssues());
         }

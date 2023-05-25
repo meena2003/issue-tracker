@@ -12,7 +12,7 @@ import org.springframework.data.relational.core.mapping.Table;
 @Getter
 @AllArgsConstructor
 @Builder
-@Table("member")
+@Table("issue_label")
 public class IssueLabel {
     @Id
     @Column("id")

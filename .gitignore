@@ -208,3 +208,6 @@ gradle-app.setting
 
 # End of https://www.toptal.com/developers/gitignore/api/java,intellij,macos,gradle
 .DS_Store
+
+# S3 application.yml
+application.yml

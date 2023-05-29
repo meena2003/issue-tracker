@@ -43,12 +43,9 @@ public class Issue {
     @Builder.Default
     private List<IssueLabel> issueLabels = new ArrayList<>();
 
+    // milestoneId 삭제전 해당 값 -> null
+    public void setMilestoneId(AggregateReference<Milestone, @NonNull Long> milestoneId) {
+        this.milestoneId = milestoneId;
+    }
 
-//    private void addManager(Member member) {
-//        managers.add(createManager(member));
-//    }
-//
-//    private Assignee createManager(Member member) {
-//        return Assignee.builder().memberId(memberId.getId()).build();
-//    }
 }

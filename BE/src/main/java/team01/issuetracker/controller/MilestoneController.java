@@ -40,4 +40,10 @@ public class MilestoneController {
         milestoneService.stateChanges(milestoneId);
     }
 
+    @DeleteMapping("/{milestoneId}")
+    public void delete(@PathVariable Long milestoneId) {
+        logger.debug("마일스톤 삭제");
+        milestoneService.delete(milestoneId);
+    }
+
 }

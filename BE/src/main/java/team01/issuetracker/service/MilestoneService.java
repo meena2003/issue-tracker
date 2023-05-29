@@ -2,7 +2,9 @@ package team01.issuetracker.service;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+import team01.issuetracker.domain.Issue;
 import team01.issuetracker.domain.Milestone;
+import team01.issuetracker.repository.IssueRepository;
 import team01.issuetracker.repository.MilestoneRepository;
 import team01.issuetracker.service.dto.response.MilestoneDTO;
 import team01.issuetracker.service.dto.response.MilestoneResponseDTO;
@@ -18,6 +20,7 @@ import java.util.List;
 public class MilestoneService {
 
     private final MilestoneRepository milestoneRepository;
+    private final IssueRepository issueRepository;
 
     /*
     todo: 마일스톤 db와 연결
@@ -65,6 +68,19 @@ public class MilestoneService {
         milestone.statusUpdate();
 
         milestoneRepository.save(milestone);
+    }
+
+    // 로직의 문제... 다음엔 IssueMilestone 테이블을 만들자 ㅠ
+    public void delete(Long milestoneId) {
+        Milestone milestone = findMilestoneById(milestoneId);
+        List<Issue> issues = milestone.getIssues();
+
+        for (Issue issue : issues) {
+            issue.setMilestoneId(null);
+        }
+
+        issueRepository.saveAll(issues);
+        milestoneRepository.delete(milestone);
     }
 
     public Milestone findMilestoneById(Long milestoneId) {

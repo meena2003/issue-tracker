@@ -210,4 +210,4 @@ gradle-app.setting
 .DS_Store
 
 # S3 application.yml
-application.yml
+application.properties

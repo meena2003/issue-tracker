@@ -16,7 +16,7 @@ import java.util.stream.Collectors;
 @RequiredArgsConstructor
 public class LabelService {
     @Autowired
-    LabelRepository labelRepository;
+    private final LabelRepository labelRepository;
 
     public LabelsResponseDTO getLabels() {
         //TODO: 카운터..는.. 나중에ㅜㅜ
@@ -42,14 +42,11 @@ public class LabelService {
     }
 
     public void update(LabelDTO labelDTO, Long labelId){
-        Label label = findLabelById(labelId);
+        Label label = labelRepository.findById(labelId)
+                .orElseThrow(() -> new RuntimeException("해당 레이블을 찾을 수 없습니다."));
         label.update(labelDTO);
         Label updatedLabel = labelRepository.save(label);
         // TODO: updatedLabel을 활용한 IssueLabel 테이블 수정
-    }
-
-    public Label findLabelById(Long id) {
-        return labelRepository.findById(id).orElseThrow();
     }
 
 }

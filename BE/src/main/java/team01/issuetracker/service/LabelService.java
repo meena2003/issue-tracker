@@ -37,8 +37,19 @@ public class LabelService {
                 .build();
     }
 
-    public void create(LabelDTO label){
-        labelRepository.save(Label.create(label));
+    public void create(LabelDTO labelDTO){
+        labelRepository.save(Label.create(labelDTO));
+    }
+
+    public void update(LabelDTO labelDTO, Long labelId){
+        Label label = findLabelById(labelId);
+        label.update(labelDTO);
+        Label updatedLabel = labelRepository.save(label);
+        // TODO: updatedLabel을 활용한 IssueLabel 테이블 수정
+    }
+
+    public Label findLabelById(Long id) {
+        return labelRepository.findById(id).orElseThrow();
     }
 
 }

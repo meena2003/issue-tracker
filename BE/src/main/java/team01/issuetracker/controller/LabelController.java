@@ -23,8 +23,15 @@ public class LabelController {
     }
 
     @PostMapping
-    public void create(@RequestBody LabelDTO label) {
+    public void create(@RequestBody LabelDTO labelDTO) {
         logger.debug("라벨 생성");
-        labelService.create(label);
+        labelService.create(labelDTO);
     }
+
+    @PatchMapping("/{labelId}")
+    public void update(@RequestBody LabelDTO labelDTO, @PathVariable Long labelId){
+        logger.debug("라벨 편집");
+        labelService.update(labelDTO, labelId);
+    }
+
 }

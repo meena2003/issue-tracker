@@ -27,13 +27,21 @@ public class Label {
     @Column("font_color_code")
     private String fontColorCode;
 
-    public static Label create(LabelDTO label) {
+    public static Label create(LabelDTO labelDTO) {
         return Label.builder()
-                .title(label.getTitle())
-                .description(label.getDescription())
-                .bgColorCode(label.getBgColorCode())
-                .fontColorCode(label.getFontColorCode())
+                .title(labelDTO.getTitle())
+                .description(labelDTO.getDescription())
+                .bgColorCode(labelDTO.getBgColorCode())
+                .fontColorCode(labelDTO.getFontColorCode())
                 .build();
+    }
+
+    public Label update(LabelDTO labelDTO) {
+        this.title = labelDTO.getTitle();
+        this.description = labelDTO.getDescription();
+        this.bgColorCode = labelDTO.getBgColorCode();
+        this.fontColorCode = labelDTO.getFontColorCode();
+        return this;
     }
 
 }

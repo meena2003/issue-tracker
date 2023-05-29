@@ -1,10 +1,8 @@
 package team01.issuetracker.service;
 
 import lombok.RequiredArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import team01.issuetracker.domain.Milestone;
-import team01.issuetracker.repository.LabelRepository;
 import team01.issuetracker.repository.MilestoneRepository;
 import team01.issuetracker.service.dto.response.MilestoneDTO;
 import team01.issuetracker.service.dto.response.MilestoneResponseDTO;
@@ -52,4 +50,18 @@ public class MilestoneService {
     public void create(MilestoneDTO milestoneDTO) {
         milestoneRepository.save(Milestone.create(milestoneDTO));
     }
+
+    public void update(MilestoneDTO milestoneDTO, Long milestoneId) {
+        Milestone milestone = findMilestoneById(milestoneId);
+
+        milestone.update(milestoneDTO);
+
+        milestoneRepository.save(milestone);
+    }
+
+    public Milestone findMilestoneById(Long milestoneId) {
+        return milestoneRepository.findById(milestoneId)
+                .orElseThrow(() -> new RuntimeException("해당 레이블을 찾을 수 없습니다."));
+    }
+
 }

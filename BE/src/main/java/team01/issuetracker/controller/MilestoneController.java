@@ -27,4 +27,11 @@ public class MilestoneController {
         logger.debug("마일스톤 생성");
         milestoneService.create(milestoneDTO);
     }
+
+    @PatchMapping("/{milestoneId}")
+    public void update(@RequestBody MilestoneDTO milestoneDTO, @PathVariable Long milestoneId) {
+        logger.debug("마일스톤 편집");
+        milestoneService.update(milestoneDTO, milestoneId);
+    }
+
 }

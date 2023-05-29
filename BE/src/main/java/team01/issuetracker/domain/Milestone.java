@@ -10,7 +10,6 @@ import org.springframework.data.relational.core.mapping.MappedCollection;
 import org.springframework.data.relational.core.mapping.Table;
 import team01.issuetracker.service.dto.response.MilestoneDTO;
 
-import java.sql.Date;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
@@ -45,5 +44,12 @@ public class Milestone {
                 .dueDate(milestoneDTO.getDueDate())
                 .isOpen(true)
                 .build();
+    }
+
+    public Milestone update(MilestoneDTO milestoneDTO) {
+        this.title = milestoneDTO.getTitle();
+        this.description = milestoneDTO.getDescription();
+        this.dueDate = milestoneDTO.getDueDate();
+        return this;
     }
 }

@@ -29,9 +29,15 @@ public class LabelController {
     }
 
     @PatchMapping("/{labelId}")
-    public void update(@RequestBody LabelDTO labelDTO, @PathVariable Long labelId){
+    public void update(@RequestBody LabelDTO labelDTO, @PathVariable Long labelId) {
         logger.debug("라벨 편집");
         labelService.update(labelDTO, labelId);
+    }
+
+    @DeleteMapping("/{labelId}")
+    public void delete(@PathVariable Long labelId) {
+        logger.debug("라벨 삭제");
+        labelService.delete(labelId);
     }
 
 }

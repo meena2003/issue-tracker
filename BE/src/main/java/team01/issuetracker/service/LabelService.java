@@ -37,16 +37,30 @@ public class LabelService {
                 .build();
     }
 
-    public void create(LabelDTO labelDTO){
+    public void create(LabelDTO labelDTO) {
         labelRepository.save(Label.create(labelDTO));
     }
 
-    public void update(LabelDTO labelDTO, Long labelId){
-        Label label = labelRepository.findById(labelId)
-                .orElseThrow(() -> new RuntimeException("해당 레이블을 찾을 수 없습니다."));
+    public void update(LabelDTO labelDTO, Long labelId) {
+        Label label = findLabelById(labelId);
+
         label.update(labelDTO);
-        Label updatedLabel = labelRepository.save(label);
-        // TODO: updatedLabel을 활용한 IssueLabel 테이블 수정
+
+        labelRepository.save(label);
+    }
+
+    public void delete(Long labelId) {
+        Label label = findLabelById(labelId);
+
+        label.getIssueLabels().stream()
+                .map(issueLabel -> issueLabel.deleteLabel(label));
+
+        labelRepository.delete(label);
+    }
+
+    public Label findLabelById(Long labelId) {
+        return labelRepository.findById(labelId)
+                .orElseThrow(() -> new RuntimeException("해당 레이블을 찾을 수 없습니다."));
     }
 
 }

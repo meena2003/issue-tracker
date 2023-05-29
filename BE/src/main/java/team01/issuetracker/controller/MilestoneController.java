@@ -4,11 +4,9 @@ import lombok.RequiredArgsConstructor;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import team01.issuetracker.service.MilestoneService;
+import team01.issuetracker.service.dto.response.MilestoneDTO;
 
 @RequiredArgsConstructor
 @RequestMapping("/api/milestones")
@@ -22,5 +20,11 @@ public class MilestoneController {
     public ResponseEntity<?> milestoneView(@RequestParam("status") String status) {
         logger.info(status + " 마일스톤 조회");
         return ResponseEntity.ok(milestoneService.getMilestone(status));
+    }
+
+    @PostMapping
+    public void create(@RequestBody MilestoneDTO milestoneDTO) {
+        logger.debug("마일스톤 생성");
+        milestoneService.create(milestoneDTO);
     }
 }

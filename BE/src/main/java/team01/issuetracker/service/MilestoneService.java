@@ -1,7 +1,11 @@
 package team01.issuetracker.service;
 
 import lombok.RequiredArgsConstructor;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import team01.issuetracker.domain.Milestone;
+import team01.issuetracker.repository.LabelRepository;
+import team01.issuetracker.repository.MilestoneRepository;
 import team01.issuetracker.service.dto.response.MilestoneDTO;
 import team01.issuetracker.service.dto.response.MilestoneResponseDTO;
 import team01.issuetracker.service.vo.Count;
@@ -14,6 +18,8 @@ import java.util.List;
 @Service
 @RequiredArgsConstructor
 public class MilestoneService {
+
+    private final MilestoneRepository milestoneRepository;
 
     /*
     todo: 마일스톤 db와 연결
@@ -41,5 +47,9 @@ public class MilestoneService {
                 .count(count)
                 .milestones(milestones)
                 .build();
+    }
+
+    public void create(MilestoneDTO milestoneDTO) {
+        milestoneRepository.save(Milestone.create(milestoneDTO));
     }
 }

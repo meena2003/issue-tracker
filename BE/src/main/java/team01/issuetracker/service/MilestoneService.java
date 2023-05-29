@@ -59,9 +59,17 @@ public class MilestoneService {
         milestoneRepository.save(milestone);
     }
 
+    public void stateChanges(Long milestoneId) {
+        Milestone milestone = findMilestoneById(milestoneId);
+
+        milestone.statusUpdate();
+
+        milestoneRepository.save(milestone);
+    }
+
     public Milestone findMilestoneById(Long milestoneId) {
         return milestoneRepository.findById(milestoneId)
-                .orElseThrow(() -> new RuntimeException("해당 레이블을 찾을 수 없습니다."));
+                .orElseThrow(() -> new RuntimeException("해당 마일스톤을 찾을 수 없습니다."));
     }
 
 }

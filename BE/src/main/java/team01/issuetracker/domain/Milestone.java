@@ -52,4 +52,10 @@ public class Milestone {
         this.dueDate = milestoneDTO.getDueDate();
         return this;
     }
+
+    public Milestone statusUpdate() {
+        this.isOpen = !isOpen;
+        return this;
+    }
+
 }

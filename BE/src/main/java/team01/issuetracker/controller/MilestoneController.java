@@ -34,4 +34,10 @@ public class MilestoneController {
         milestoneService.update(milestoneDTO, milestoneId);
     }
 
+    @PatchMapping("/{milestoneId}/status")
+    public void stateChanges(@PathVariable Long milestoneId) {
+        logger.debug("마일스톤 상태 반전");
+        milestoneService.stateChanges(milestoneId);
+    }
+
 }

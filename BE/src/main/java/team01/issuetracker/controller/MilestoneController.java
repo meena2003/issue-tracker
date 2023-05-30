@@ -17,7 +17,7 @@ public class MilestoneController {
     private final Logger logger = LoggerFactory.getLogger(MilestoneController.class);
 
     @GetMapping
-    public ResponseEntity<?> milestoneView(@RequestParam("status") String status) {
+    public ResponseEntity<?> milestoneView(@RequestParam("isOpen") boolean status) {
         logger.info(status + " 마일스톤 조회");
         return ResponseEntity.ok(milestoneService.getMilestone(status));
     }

@@ -7,6 +7,7 @@ import org.springframework.data.relational.core.mapping.Column;
 import org.springframework.data.relational.core.mapping.MappedCollection;
 import org.springframework.data.relational.core.mapping.Table;
 
+import java.time.LocalDateTime;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -29,8 +30,8 @@ public class Issue {
     private String description;
     @Column("is_open")
     private boolean isOpen;
-    //    @Column("create_date_time")
-//    private LocalDateTime createAt;
+    @Column("create_date_time")
+    private LocalDateTime createAt;
     @Column("file_url")
     private String fileUrl;
     @Column("milestone_id")

@@ -23,10 +23,10 @@ import java.util.stream.Collectors;
 @Service
 @RequiredArgsConstructor
 public class IssueService {
-    IssueRepository issueRepository;
-    MemberRepository memberRepository;
-    LabelRepository labelRepository;
-    MilestoneRepository milestoneRepository;
+    private final IssueRepository issueRepository;
+    private final MemberRepository memberRepository;
+    private final LabelRepository labelRepository;
+    private final MilestoneRepository milestoneRepository;
 
     public IssuesResponseDTO getIssues(FilterRequestDTO requestDTO) {
         /*

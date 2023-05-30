@@ -19,8 +19,7 @@ public class IssueController {
 
     @GetMapping
     public ResponseEntity<?> view(FilterRequestDTO requestDTO) {
-        logger.info("그 리퀘파람 테스트 임돠");
-
+        logger.info("이슈 필터 호출");
         return ResponseEntity.ok(issueService.getIssues(requestDTO));
     }
 

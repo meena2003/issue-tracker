@@ -2,7 +2,12 @@ package team01.issuetracker.service;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+import team01.issuetracker.domain.Assignee;
+import team01.issuetracker.domain.Issue;
+import team01.issuetracker.domain.IssueLabel;
+import team01.issuetracker.repository.IssueRepository;
 import team01.issuetracker.service.dto.request.FilterRequestDTO;
+import team01.issuetracker.service.dto.request.IssueRequestDTO;
 import team01.issuetracker.service.dto.response.IssueResponseDTO;
 import team01.issuetracker.service.dto.response.IssuesResponseDTO;
 import team01.issuetracker.service.vo.Count;
@@ -14,10 +19,15 @@ import java.time.ZonedDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
+import java.util.Set;
+import java.util.stream.Collectors;
 
 @Service
 @RequiredArgsConstructor
 public class IssueService {
+
+    private final IssueRepository issueRepository;
 
     public IssuesResponseDTO openIssues() {
         Count count = Count.builder() // 임시 값(명세서)
@@ -145,8 +155,41 @@ public class IssueService {
         /*
         TODO: 필터에 해당하는 이슈 리스트를 생성(스트림 사용)
          */
+//        List<Issue> test = issueRepository.test(requestDTO);
+//        test.stream().forEach(System.out::println);
         List<IssueResponseDTO> issues = new ArrayList<>();
+
 
         return IssuesResponseDTO.of(count, issues);
     }
+
+    public void create(IssueRequestDTO issueDTO) {
+        Issue issue = Issue.create(
+                issueDTO.getWriterId(),
+                issueDTO.getTitle(),
+                issueDTO.getDescription(),
+                issueDTO.getFileUrl(),
+                issueDTO.getMilestoneId()
+        );
+
+        Set<Assignee> assigneeList = issueDTO.getAssigneeIds().stream()
+                .filter(Objects::nonNull)
+                .map(assigneeId -> Assignee.builder()
+                        .memberId(assigneeId)
+                        .issueId(issue.getId())
+                        .build())
+                .collect(Collectors.toSet());
+        issue.setAssignees(assigneeList);
+
+        Set<IssueLabel> issueLabelList = issueDTO.getLabelIds().stream()
+                .map(labelId -> IssueLabel.builder()
+                        .labelId(labelId)
+                        .issueId(issue.getId())
+                        .build())
+                .collect(Collectors.toSet());
+        issue.setIssueLabels(issueLabelList);
+
+        issueRepository.save(issue);
+    }
+
 }

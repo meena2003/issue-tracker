@@ -29,14 +29,11 @@ public class IssueService {
     private final MilestoneRepository milestoneRepository;
 
     public IssuesResponseDTO getIssues(FilterRequestDTO requestDTO) {
-        /*
-        TODO: 필터값을 활용해 카운트값을 설정
-         */
         Count count = Count.builder() // 필터에 따라서 값이 바뀜
-                .label(4)
-                .milestone(2)
-                .opened(2)
-                .closed(2)
+                .label((int) labelRepository.count())
+                .milestone(milestoneRepository.countByIsOpen(true))
+                .opened(issueRepository.countByIsOpen(true))
+                .closed(issueRepository.countByIsOpen(false))
                 .build();
 
         //맴버 전체 조회

@@ -10,7 +10,7 @@ import java.util.List;
 
 @Repository
 public interface IssueRepository extends CrudRepository<Issue, Long> {
-    long countByIsOpen(boolean state);
+    int countByIsOpen(boolean state);
 
     int countByIsOpenAndMilestoneId(boolean state, Long id);
 

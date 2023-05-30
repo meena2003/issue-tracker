@@ -8,14 +8,14 @@ import team01.issuetracker.domain.Member;
 @Getter
 @Builder
 @AllArgsConstructor
-public class AssigneeDTO {
+public class MemberDTO {
 
     private final long id;
     private final String name;
     private final String imgUrl;
 
-    public static AssigneeDTO of(Member assignee) {
-        return AssigneeDTO.builder()
+    public static MemberDTO of(Member assignee) {
+        return MemberDTO.builder()
                 .id(assignee.getId())
                 .name(assignee.getName())
                 .imgUrl(assignee.getFileURL())

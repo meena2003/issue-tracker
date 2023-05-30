@@ -11,5 +11,5 @@ import java.util.List;
 @AllArgsConstructor
 public class AssigneesResponseDTO {
 
-    private final List<AssigneeDTO> assignees;
+    private final List<MemberDTO> assignees;
 }

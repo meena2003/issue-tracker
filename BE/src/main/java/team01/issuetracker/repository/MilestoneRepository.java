@@ -8,8 +8,4 @@ import java.util.List;
 public interface MilestoneRepository extends CrudRepository<Milestone, Long> {
     List<Milestone> findAll();
 
-    List<Milestone> findAllByIsOpen(boolean state);
-
-    int countByIsOpen(boolean state);
-
 }

@@ -11,14 +11,15 @@ import java.util.List;
 @Repository
 public interface IssueRepository extends CrudRepository<Issue, Long> {
 
-    long countByIsOpen(boolean state);
+    int countByIsOpen(boolean state);
+
+    int countByIsOpenAndMilestoneId(boolean state, Long id);
 
     List<Issue> findAllByIsOpen(boolean state);
 
     List<Issue> findAll();
 
-    @Query("select * from issue where milestone_id = :id")
-    List<Issue> findByMilestoneId(Long id);
+    List<Issue> findAllByMilestoneId(Long id);
 
     @Query("SELECT DISTINCT i.id, i.WRITER_ID, i.TITLE, i.DESCRIPTION, i.IS_OPEN, i.CREATE_DATE_TIME, i.MILESTONE_ID FROM issue i" +
             "    LEFT OUTER JOIN issue_label il ON i.id = il.issue_id" +

@@ -19,4 +19,6 @@ public class Assignee {
     private Long id;
     @Column("member_id")
     private Long memberId;
+    @Column("issue_id")
+    private Long issueId;
 }

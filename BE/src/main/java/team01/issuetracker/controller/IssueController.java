@@ -4,11 +4,10 @@ import lombok.RequiredArgsConstructor;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import team01.issuetracker.service.IssueService;
 import team01.issuetracker.service.dto.request.FilterRequestDTO;
+import team01.issuetracker.service.dto.request.IssueRequestDTO;
 
 @RequiredArgsConstructor
 @RequestMapping("/api/issues")
@@ -20,8 +19,13 @@ public class IssueController {
 
     @GetMapping
     public ResponseEntity<?> view(FilterRequestDTO requestDTO) {
-        logger.info("그 리퀘파람 테스트 임돠");
-
+        logger.info("이슈 필터 호출");
         return ResponseEntity.ok(issueService.getIssues(requestDTO));
+    }
+
+    @PostMapping
+    public void create(@RequestBody IssueRequestDTO issueDTO) {
+        logger.debug("이슈 생성");
+        issueService.create(issueDTO);
     }
 }

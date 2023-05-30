@@ -1,37 +1,32 @@
 package team01.issuetracker.service;
 
 import lombok.RequiredArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import team01.issuetracker.domain.Label;
-import team01.issuetracker.domain.Member;
-import team01.issuetracker.domain.Milestone;
+import team01.issuetracker.domain.*;
 import team01.issuetracker.repository.IssueRepository;
 import team01.issuetracker.repository.LabelRepository;
 import team01.issuetracker.repository.MemberRepository;
 import team01.issuetracker.repository.MilestoneRepository;
 import team01.issuetracker.service.dto.request.FilterRequestDTO;
+import team01.issuetracker.service.dto.request.IssueRequestDTO;
 import team01.issuetracker.service.dto.response.IssueResponseDTO;
 import team01.issuetracker.service.dto.response.IssuesResponseDTO;
 import team01.issuetracker.service.vo.Count;
 import team01.issuetracker.service.vo.MiniLabel;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
+import java.util.Objects;
+import java.util.Set;
 import java.util.stream.Collectors;
 
 @Service
 @RequiredArgsConstructor
 public class IssueService {
-    @Autowired
-    IssueRepository issueRepository;
-    @Autowired
-    MemberRepository memberRepository;
-    @Autowired
-    LabelRepository labelRepository;
-    @Autowired
-    MilestoneRepository milestoneRepository;
+    private final IssueRepository issueRepository;
+    private final MemberRepository memberRepository;
+    private final LabelRepository labelRepository;
+    private final MilestoneRepository milestoneRepository;
 
     public IssuesResponseDTO getIssues(FilterRequestDTO requestDTO) {
         /*
@@ -57,7 +52,7 @@ public class IssueService {
         //issue -> issueResponseDTO로 변환
         List<IssueResponseDTO> issues = issueRepository.findAllByFilter(requestDTO.isOpen(), requestDTO.getMilestone(), requestDTO.getLabel(), requestDTO.getAssignee(), requestDTO.getWriters()).stream()
                 .map(issue -> IssueResponseDTO.of(issue,
-                        members.get(issue.getMemberId().getId()),
+                        members.get(issue.getWriterId().getId()),
                         issue.getMilestoneId() == null ? "" : milestones.get(issue.getMilestoneId().getId()).getTitle(),
                         issue.getIssueLabels().stream().map(il -> MiniLabel.of(labels.get(il.getLabelId()))).collect(Collectors.toList())))
                 .collect(Collectors.toList());
@@ -66,4 +61,34 @@ public class IssueService {
 
         return IssuesResponseDTO.of(count, issues);
     }
+
+    public void create(IssueRequestDTO issueDTO) {
+        Issue issue = Issue.create(
+                issueDTO.getWriterId(),
+                issueDTO.getTitle(),
+                issueDTO.getDescription(),
+                issueDTO.getFileUrl(),
+                issueDTO.getMilestoneId()
+        );
+
+        Set<Assignee> assigneeList = issueDTO.getAssigneeIds().stream()
+                .filter(Objects::nonNull)
+                .map(assigneeId -> Assignee.builder()
+                        .memberId(assigneeId)
+                        .issueId(issue.getId())
+                        .build())
+                .collect(Collectors.toSet());
+        issue.setAssignees(assigneeList);
+
+        Set<IssueLabel> issueLabelList = issueDTO.getLabelIds().stream()
+                .map(labelId -> IssueLabel.builder()
+                        .labelId(labelId)
+                        .issueId(issue.getId())
+                        .build())
+                .collect(Collectors.toSet());
+        issue.setIssueLabels(issueLabelList);
+
+        issueRepository.save(issue);
+    }
+
 }

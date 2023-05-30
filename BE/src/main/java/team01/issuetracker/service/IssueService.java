@@ -54,8 +54,6 @@ public class IssueService {
                         issue.getIssueLabels().stream().map(il -> MiniLabel.of(labels.get(il.getLabelId()))).collect(Collectors.toList())))
                 .collect(Collectors.toList());
 
-        System.out.println(issues);
-
         return IssuesResponseDTO.of(count, issues);
     }
 

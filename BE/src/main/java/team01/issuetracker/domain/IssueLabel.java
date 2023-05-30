@@ -19,4 +19,6 @@ public class IssueLabel {
     private Long id;
     @Column("label_id")
     private Long labelId;
+    @Column("issue_id")
+    private Long issueId;
 }

@@ -11,5 +11,5 @@ import java.util.List;
 @AllArgsConstructor
 public class WritersResponseDTO {
 
-    private final List<AssigneeDTO> writers;
+    private final List<MemberDTO> writers;
 }

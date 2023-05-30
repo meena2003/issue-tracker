@@ -3,7 +3,7 @@ package team01.issuetracker.service.dto.response;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
-import team01.issuetracker.service.vo.Assignee;
+import team01.issuetracker.domain.Member;
 
 @Getter
 @Builder
@@ -14,11 +14,11 @@ public class AssigneeDTO {
     private final String name;
     private final String imgUrl;
 
-    public static AssigneeDTO of(Assignee assignee) {
+    public static AssigneeDTO of(Member assignee) {
         return AssigneeDTO.builder()
                 .id(assignee.getId())
                 .name(assignee.getName())
-                .imgUrl(assignee.getImgUrl())
+                .imgUrl(assignee.getFileURL())
                 .build();
     }
 }

@@ -28,4 +28,10 @@ public class IssueController {
         logger.debug("이슈 생성");
         issueService.create(issueDTO);
     }
+
+    @GetMapping("/{id}")
+    public ResponseEntity<?> detailView(@PathVariable Long id) {
+        logger.debug("이슈 상세보기");
+        return ResponseEntity.ok(issueService.getIssue(id));
+    }
 }

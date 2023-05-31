@@ -7,9 +7,12 @@ import org.springframework.stereotype.Repository;
 import team01.issuetracker.domain.Issue;
 
 import java.util.List;
+import java.util.Optional;
 
 @Repository
 public interface IssueRepository extends CrudRepository<Issue, Long> {
+    Optional<Issue> findById(Long id);
+
     int countByIsOpen(boolean state);
 
     int countByIsOpenAndMilestoneId(boolean state, Long id);

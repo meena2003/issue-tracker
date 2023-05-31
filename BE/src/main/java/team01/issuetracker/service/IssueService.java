@@ -9,8 +9,7 @@ import team01.issuetracker.repository.MemberRepository;
 import team01.issuetracker.repository.MilestoneRepository;
 import team01.issuetracker.service.dto.request.FilterRequestDTO;
 import team01.issuetracker.service.dto.request.IssueRequestDTO;
-import team01.issuetracker.service.dto.response.IssueResponseDTO;
-import team01.issuetracker.service.dto.response.IssuesResponseDTO;
+import team01.issuetracker.service.dto.response.*;
 import team01.issuetracker.service.vo.Count;
 import team01.issuetracker.service.vo.MiniLabel;
 
@@ -86,4 +85,38 @@ public class IssueService {
         issueRepository.save(issue);
     }
 
+    public IssueDetailResponseDTO getIssue(Long id) {
+        Issue issue = issueRepository.findById(id).orElseThrow();
+
+        MilestoneDTO issueMilestone = null;
+        //마일스톤 정보 조회 (1개만 존재)
+        if (issue.getMilestoneId() != null) {
+            Milestone milestone = milestoneRepository.findById(issue.getMilestoneId().getId()).orElseThrow();
+            int openIssueCount = issueRepository.countByIsOpenAndMilestoneId(true, milestone.getId());
+            int closedIssueCount = issueRepository.countByIsOpenAndMilestoneId(false, milestone.getId());
+            issueMilestone = MilestoneDTO.of(milestone, openIssueCount, closedIssueCount);
+        }
+
+
+        //맴버 전체 조회
+        Map<Long, Member> members = memberRepository.findAll().stream()
+                .collect(Collectors.toMap(Member::getId, member -> member));
+        //레이블 전체 조회
+        Map<Long, Label> labels = labelRepository.findAll().stream()
+                .collect(Collectors.toMap(Label::getId, label -> label));
+
+        //해당 라벨
+        List<LabelDTO> issueLabels = issue.getIssueLabels().stream()
+                .map(il -> LabelDTO.of(labels.get(il.getLabelId())))
+                .collect(Collectors.toList());
+
+        //해당 작성자
+        Member writer = members.get(issue.getWriterId().getId());
+
+        List<MemberDTO> assignees = issue.getAssignees().stream()
+                .map(a -> MemberDTO.of(members.get(a.getMemberId())))
+                .collect(Collectors.toList());
+
+        return IssueDetailResponseDTO.of(issue, writer, issueMilestone, issueLabels, assignees);
+    }
 }

@@ -1,5 +1,6 @@
 package team01.issuetracker.aws;
 
+import lombok.Getter;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -8,6 +9,8 @@ import software.amazon.awssdk.services.s3.model.PutObjectResponse;
 
 @RestController
 public class FileUploadController {
+
+    @Getter
     private final FileUploadService fileUploadService;
 
     public FileUploadController(FileUploadService fileUploadService) {

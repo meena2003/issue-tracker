@@ -22,15 +22,15 @@ public class MilestoneService {
     private final IssueRepository issueRepository;
     private final LabelRepository labelRepository;
 
-    /*
-    todo: 마일스톤 db와 연결
-     */
     public MilestoneResponseDTO getMilestone(boolean status) {
-        Count count = Count.builder() // 임시 값(명세서)
+        int openMilestoneCount = milestoneRepository.countByIsOpen(true);
+        int closedMilestoneCount = milestoneRepository.countByIsOpen(false);
+
+        Count count = Count.builder()
                 .label((int) labelRepository.count())
-                .milestone((int) milestoneRepository.count())
-                .opened(milestoneRepository.countByIsOpen(true))
-                .closed(milestoneRepository.countByIsOpen(false))
+                .milestone(openMilestoneCount)
+                .opened(openMilestoneCount)
+                .closed(closedMilestoneCount)
                 .build();
 
         List<MilestoneDTO> milestones = milestoneRepository.findAllByIsOpen(status).stream()

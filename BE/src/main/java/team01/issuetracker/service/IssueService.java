@@ -46,7 +46,7 @@ public class IssueService {
                 .collect(Collectors.toMap(Milestone::getId, milestone -> milestone));
 
         //issue -> issueResponseDTO로 변환
-        List<IssueResponseDTO> issues = issueRepository.findAllByFilter(requestDTO.isOpen(), requestDTO.getMilestones(), requestDTO.getLabels(), requestDTO.getAssignees(), requestDTO.getWriters()).stream()
+        List<IssueResponseDTO> issues = issueRepository.findAllByFilter(requestDTO.getIsOpen(), requestDTO.getMilestones(), requestDTO.getLabels(), requestDTO.getAssignees(), requestDTO.getWriters()).stream()
                 .map(issue -> IssueResponseDTO.of(issue,
                         members.get(issue.getWriterId().getId()),
                         issue.getMilestoneId() == null ? "" : milestones.get(issue.getMilestoneId().getId()).getTitle(),

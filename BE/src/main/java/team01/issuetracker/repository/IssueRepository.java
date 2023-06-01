@@ -32,7 +32,7 @@ public interface IssueRepository extends CrudRepository<Issue, Long> {
             "    AND ((:assignee IS NULL OR a.MEMBER_ID in (:assignee)) OR (a.MEMBER_ID IS NULL AND :assignee = 0))" +
             "    AND ((:label IS NULL OR il.label_id in (:label)) OR (il.LABEL_ID IS NULL AND :label = 0))" +
             "    ORDER BY i.id DESC;")
-    List<Issue> findAllByFilter(@Param("isOpen") boolean isOpen,
+    List<Issue> findAllByFilter(@Param("isOpen") Boolean isOpen,
                                 @Param("milestone") Long milestone,
                                 @Param("label") Long label,
                                 @Param("assignee") Long assignee,
